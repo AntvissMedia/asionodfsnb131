@@ -1,7 +1,8 @@
-from core.settings import get_settings
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from v1 import router as v1
+
+from app.core.settings import get_settings
+from app.v1 import router as v1
 
 settings = get_settings()
 
