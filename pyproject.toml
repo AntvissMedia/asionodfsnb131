@@ -1,0 +1,67 @@
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.mypy_cache
+  | \.pytest_cache
+  | build
+  | dist
+  | alembic
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+lint.select = ["E", "F", "W", "B", "I"]
+lint.ignore = ["E203", "E501","F821"]
+exclude = [
+  ".git",
+  ".venv",
+  ".mypy_cache",
+  ".pytest_cache",
+  "build",
+  "dist",
+  "alembic",
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+ignore_missing_imports = true
+strict_equality = true
+exclude = [
+  "alembic",
+  "tests",
+]
+[tool.uv.run.dev]
+cmd = "uvicorn"
+args = ["app:app", "--reload"]
+
+[tool.uv.run.lint]
+cmd = "powershell"
+args = ["-Command", "ruff check .; black --check .; mypy ."]
+
+
+
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-q --strict-markers --disable-warnings"
+testpaths = [
+  "app/tests",
+]
+pythonpath = [
+  "app",
+]
