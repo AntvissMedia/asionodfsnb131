@@ -154,3 +154,5 @@ exports/models.txt
 exports/routers.txt
 exports/schemas.txt
 exports/services.txt
+.vercel
+.env*.local
